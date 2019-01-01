@@ -3,6 +3,7 @@ package com.example.andrey.myapplication;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,15 +16,10 @@ public class MainActivity extends AppCompatActivity {
     private Button one;
     private  TextView text;
 
-//    @Override
-//    public boolean onCreateOptionsMenu (Menu menu){
-//        getMenuInflater().inflate(R.menu.main_menu,menu);
-//        return true;
-//    }
 
-//    @Override
-
-
+    /////
+    // Создание контекстного меню в заголовке
+    /////
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main_menu,menu);
@@ -50,14 +46,51 @@ public class MainActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-    
+
+    /////
+    // Конец создания контекстного меню в заголовке
+    /////
+
+
+
+
+    /////
+    // Создание контекстного меню при долгом нажатии на поле
+    /////
+
+    public static final int GROUP_ID = Menu.NONE;
+    public static final int MENU_ITEM_ID = 42;
+    public static final int ORDER = Menu.NONE;
+
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+//        getMenuInflater().inflate(R.menu.main_menu,menu);
+        return super.onContextItemSelected(item);
+    }
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        if (v.getId() == R.id.tv_hello) {
+            menu.add(GROUP_ID,MENU_ITEM_ID, ORDER, "Context menu");
+        }
+        else super.onCreateContextMenu(menu, v, menuInfo);
+    }
+
+    /////
+    // Конец создания контекстного меню при долгом нажатии на поле
+    /////
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
         getString(R.string.test);
+//        testMenu = findViewById(R.id.tv_hello);
 
 
         // Работа с цветами
@@ -91,6 +124,12 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+
+
+        registerForContextMenu(text);
+//        public static final int GROUP_ID = Menu.NONE;
+
+
 
     }
 }
