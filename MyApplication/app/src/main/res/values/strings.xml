@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">My Application</string>
+    <string name="app_name">LikeFlow</string>
     <string name="test">Test text</string>
     <string name="hello_world">Hello World!</string>
     <integer name="test_integer">10</integer>
